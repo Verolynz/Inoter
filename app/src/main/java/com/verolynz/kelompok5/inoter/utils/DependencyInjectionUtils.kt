@@ -5,10 +5,6 @@ import com.verolynz.kelompok5.inoter.data.local.OlahragaDB
 import com.verolynz.kelompok5.inoter.data.repositories.OlahragaRepository
 //apa yang dilakukan oleh DependencyInjectionUtils adalah memberikan repository yang dibutuhkan oleh ViewModels
 
-//hola amigass
-//pepek
-
-
 object DependencyInjectionUtils {
 
     fun provideRepository(context: Context) : OlahragaRepository {
