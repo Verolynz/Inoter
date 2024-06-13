@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Inoter"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.Inoter"
+            android:name=".ui.activities.InoterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

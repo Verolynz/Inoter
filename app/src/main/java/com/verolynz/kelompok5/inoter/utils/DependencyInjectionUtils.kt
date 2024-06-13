@@ -9,10 +9,10 @@ object DependencyInjectionUtils {
 
     fun provideRepository(context: Context) : OlahragaRepository {
         val database = OlahragaDB.getDatabase(context)
-        val ExecutorsUtils = ExecutorsUtils()
+        val executorsUtils = ExecutorsUtils()
         val coDao = database.CODao()
         val atletDao = database.AtletDao()
-        return OlahragaRepository.getInstance(coDao, atletDao, ExecutorsUtils)
+        return OlahragaRepository.getInstance(coDao, atletDao, executorsUtils)
     }
 
 }
