@@ -6,5 +6,5 @@ data class COResponse(
     val name: String,
     val deskripsi: String,
     val dibuat: LocalDateTime,
-    val id: Int
+    val id: String
 )

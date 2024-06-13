@@ -12,13 +12,18 @@ import androidx.room.Update
 interface AtletDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAtlet(atletEntity: AtletEntity)
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllAtlet(data: List<AtletEntity>)
     @Update
     fun updateAtlet(atletEntity: AtletEntity)
 
     @Delete
     fun deleteAtlet(atletEntity: AtletEntity)
+    @Query("DELETE FROM atlet")
+    fun deleteAllAtlet()
 
-    @Query("SELECT * FROM atletentity ORDER BY id DESC")
+    @Query("SELECT * FROM atlet ORDER BY id DESC")
     fun getAllAtlet() : LiveData<List<AtletEntity>>
+    @Query("SELECT * FROM atlet ORDER BY id DESC")
+    fun getAllAtletList() : List<AtletEntity>
 }

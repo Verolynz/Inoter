@@ -13,12 +13,20 @@ interface CODao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCO(cOEntity: COEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllCO(data: List<COEntity>)
+
     @Update
     fun updateCO(cOEntity: COEntity)
 
+
     @Delete
     fun deleteCO(cOEntity: COEntity)
+    @Query("DELETE FROM cabang_olahraga")
+    fun deleteAllCO()
 
     @Query("SELECT * FROM cabang_olahraga ORDER BY id DESC")
     fun getAllCO() : LiveData<List<COEntity>>
+    @Query("SELECT * FROM cabang_olahraga ORDER BY id DESC")
+    fun getAllCOList() : List<COEntity>
 }

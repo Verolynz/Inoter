@@ -7,6 +7,6 @@ data class AtletResponse(
     val deskripsi: String,
     val tahun: LocalDateTime,
     val dibuat: LocalDateTime,
-    val id: Int,
-    val CabangOlahragaId: Int
+    val id: String,
+    val CabangOlahragaId: String
 )
