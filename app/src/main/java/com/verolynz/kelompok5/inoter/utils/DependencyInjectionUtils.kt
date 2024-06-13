@@ -3,7 +3,7 @@ package com.verolynz.kelompok5.inoter.utils
 import android.content.Context
 import com.verolynz.kelompok5.inoter.data.local.OlahragaDB
 import com.verolynz.kelompok5.inoter.data.repositories.OlahragaRepository
-//apa yang dilakukan oleh DependencyInjectionUtils adalah memberikan repository yang dibutuhkan oleh ViewModel
+//apa yang dilakukan oleh DependencyInjectionUtils adalah memberikan repository yang dibutuhkan oleh ViewModels
 
 object DependencyInjectionUtils {
 
