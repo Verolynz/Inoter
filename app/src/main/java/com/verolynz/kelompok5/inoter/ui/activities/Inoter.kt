@@ -1,9 +1,10 @@
-package com.verolynz.kelompok5.inoter
+package com.verolynz.kelompok5.inoter.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.verolynz.kelompok5.inoter.R
 
-class MainActivity : AppCompatActivity() {
+class Inoter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
