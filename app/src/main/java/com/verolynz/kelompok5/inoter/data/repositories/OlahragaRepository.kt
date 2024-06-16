@@ -268,14 +268,19 @@ class OlahragaRepository private constructor(
             if (users != null) {
                 if (users.username == username && users.password == password) {
                     if (users.role == "admin") {
+                        Toast.makeText(context, "Anda login sebagai Admin", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, AdminMainActivity::class.java)
                         context.startActivity(intent)
-                    } else {
-                        Toast.makeText(context, "Anda login sebagai user", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(context, "Username atau password salah", Toast.LENGTH_SHORT).show()
-                }
+                    if (users.role == "user") {
+                        Toast.makeText(context, "Anda login sebagai User", Toast.LENGTH_SHORT).show()
+                        // val intent = Intent(context, UserMainActivity::class.java)
+                        // context.startActivity(intent)
+                    }
+                    }
+            }
+            if (users == null) {
+                Toast.makeText(context, "Username atau Password Salah", Toast.LENGTH_SHORT).show()
             }
         })
     }
