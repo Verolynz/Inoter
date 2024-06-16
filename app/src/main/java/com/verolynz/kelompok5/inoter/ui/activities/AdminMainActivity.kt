@@ -1,8 +1,7 @@
-package com.example.yourapp.ui.activities
+package com.verolynz.kelompok5.inoter.ui.activities
 
 import android.os.Bundle
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.verolynz.kelompok5.inoter.R
 
-class MainActivity : AppCompatActivity() {
+class AdminMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity() {
             showPopupMenu(view)
         }
     }
+
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
