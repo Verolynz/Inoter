@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_add_article"
+        android:title="Tambah Artikel"
+        android:icon="@drawable/baseline_article_24" />
+    <item
+        android:id="@+id/action_add_sport"
+        android:title="Tambah Olahraga"
+        android:icon="@drawable/baseline_sports_24" />
+</menu>

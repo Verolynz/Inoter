@@ -5,47 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
+    android:orientation="vertical"
     tools:context=".ui.activities.InoterActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/salam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_medium"
-            android:text="Selamat Pagi,Martin"
+            android:text="Selamat Pagi, Martin"
+            android:drawableRight="@drawable/baseline_wb_sunny_24"
+            android:drawablePadding="10dp"
             android:textSize="14sp"
             android:layout_marginBottom="6dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:layout_marginBottom="6dp"
             android:textColor="@color/black"
-            android:text="Mari Jelajahi Olahraga Favoritmu"/>
+            android:text="Mari Jelajahi Olahraga Favoritmu" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rvartikelmainactivity"/>
+            tools:listitem="@layout/rvartikelmainactivity" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilih Olahraga : "
+            android:text="Pilih Olahraga :"
             android:textSize="10dp"
-            android:fontFamily="@font/quicksand_medium"/>
+            android:fontFamily="@font/quicksand_medium" />
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rviconolahraga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/rviconolahraga"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
     </LinearLayout>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/baseline_add_24"
+        android:contentDescription="tambah" />
 
 </LinearLayout>
