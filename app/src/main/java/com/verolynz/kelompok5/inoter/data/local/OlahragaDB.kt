@@ -4,10 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-@Database(entities = [COEntity::class, AtletEntity::class], version = 1)
+import androidx.room.TypeConverters
+import com.verolynz.kelompok5.inoter.utils.Converters
+
+@Database(entities = [COEntity::class, AtletEntity::class, UsersEntity::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class OlahragaDB : RoomDatabase() {
     abstract fun CODao(): CODao
     abstract fun AtletDao(): AtletDao
+
+    abstract fun UsersDao(): UsersDao
 
     companion object {
 

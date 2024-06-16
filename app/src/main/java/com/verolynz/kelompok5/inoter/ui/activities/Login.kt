@@ -23,6 +23,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         Repository()
         loginviewholder()
+        generateadmin()
 
     }
 
@@ -54,5 +55,8 @@ class Login : AppCompatActivity() {
 
     private fun login(username: String, password: String) {
         olahragaRepository.loginAuth(username, password, this)
+    }
+    private fun generateadmin() {
+        olahragaRepository.checkAndCreateAdmin()
     }
 }

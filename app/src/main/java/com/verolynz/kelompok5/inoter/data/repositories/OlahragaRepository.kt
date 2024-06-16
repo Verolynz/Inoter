@@ -266,7 +266,7 @@ class OlahragaRepository private constructor(
 //
 //
 //    }
-    suspend fun checkAndCreateAdmin() {
+    fun checkAndCreateAdmin() {
         val adminUser = usersDao.getUsersAdmin().value
         if (adminUser == null || adminUser.isEmpty()) {
             createDefaultAdmin()
@@ -274,8 +274,8 @@ class OlahragaRepository private constructor(
     }
 
 
-    suspend fun createDefaultAdmin() {
-        withContext(Dispatchers.IO) {
+    fun createDefaultAdmin() {
+        executorsUtils.diskIO().execute {
             val defaultAdmin = UsersEntity(
                 id = 0, // Anda bisa mengatur ID sesuai kebutuhan
                 username = "admin",
