@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter
         )
     ]
 )
+
 data class AtletEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
