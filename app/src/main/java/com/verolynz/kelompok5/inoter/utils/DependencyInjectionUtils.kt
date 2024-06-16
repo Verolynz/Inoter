@@ -24,7 +24,8 @@ object DependencyInjectionUtils {
         val executorsUtils = ExecutorsUtils()
         val coDao = database.CODao()
         val atletDao = database.AtletDao()
-        return OlahragaRepository.getInstance(coDao, atletDao, executorsUtils)
+        val userDao = database.UsersDao()
+        return OlahragaRepository.getInstance(coDao, atletDao, userDao ,executorsUtils)
     }
 
 }
