@@ -21,6 +21,8 @@ import com.verolynz.kelompok5.inoter.data.remote.ConfigAPI
 import com.verolynz.kelompok5.inoter.data.remote.ServiceAPI
 import com.verolynz.kelompok5.inoter.utils.ExecutorsUtils
 import com.verolynz.kelompok5.inoter.utils.NetworkUtils
+import com.verolynz.kelompok5.inoter.utils.toAtletEntity
+import com.verolynz.kelompok5.inoter.utils.toCOEntity
 import com.verolynz.kelompok5.inoter.utils.toListAtletEntity
 import com.verolynz.kelompok5.inoter.utils.toListAtletResponse
 import com.verolynz.kelompok5.inoter.utils.toListCOEntity
@@ -58,6 +60,7 @@ class OlahragaRepository private constructor(
                     executorsUtils.diskIO().execute {
                         cODao.insertAllCO(responseBody.toListCOEntity())
                     }
+
                 } else {
                     Log.e("Error on Response", "onFailure: ${response.message()}")
                 }
@@ -71,17 +74,46 @@ class OlahragaRepository private constructor(
             }
         })
     }
-    private val serviceAPI = ConfigAPI.getApiService()
-    suspend fun createCO(co: COResponse): COResponse {
-        return serviceAPI.createCO(co).execute().body() ?: throw Exception("Failed to create CO")
+    fun createCO(co: COResponse): COResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.createCO(co).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    cODao.insertCO(responseBody.toCOEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to create CO")
     }
 
-    suspend fun updateCO(id: String, co: COResponse): COResponse {
-        return serviceAPI.updateCO(id, co).execute().body() ?: throw Exception("Failed to update CO")
+    fun updateCO(id: String, co: COResponse): COResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.updateCO(id, co).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    cODao.updateCO(responseBody.toCOEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to update CO")
     }
 
-    suspend fun deleteCO(id: String) {
-        serviceAPI.deleteCO(id).execute()
+    fun deleteCO(id: String) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.deleteCO(id).execute()
+        if (response.isSuccessful) {
+            executorsUtils.diskIO().execute {
+                cODao.deleteCOId(id.toInt())
+            }
+        } else {
+            throw Exception("Failed to delete CO")
+        }
     }
     fun getAllAtlet() {
         val service = ConfigAPI.getApiService().getAllAtlet()
@@ -111,17 +143,47 @@ class OlahragaRepository private constructor(
             }
         })
     }
-    suspend fun createAtlet(atlet: AtletResponse): AtletResponse {
-        return serviceAPI.createAtlet(atlet).execute().body() ?: throw Exception("Failed to create Atlet")
+    fun createAtlet(atlet: AtletResponse): AtletResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.createAtlet(atlet).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    atletDao.insertAtlet(responseBody.toAtletEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to create Atlet")
     }
 
 
-    suspend fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
-        return serviceAPI.updateAtlet(id, atlet).execute().body() ?: throw Exception("Failed to update Atlet")
+    fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.updateAtlet(id, atlet).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    atletDao.updateAtlet(responseBody.toAtletEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to update Atlet")
     }
 
-    suspend fun deleteAtlet(id: String) {
-        serviceAPI.deleteAtlet(id).execute()
+    fun deleteAtlet(id: String) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.deleteAtlet(id).execute()
+        if (response.isSuccessful) {
+            executorsUtils.diskIO().execute {
+                atletDao.deleteAtletId(id.toInt())
+            }
+        } else {
+            throw Exception("Failed to delete Atlet")
+        }
     }
 
     fun insertCO(coEntity: COEntity) {
@@ -201,11 +263,15 @@ class OlahragaRepository private constructor(
             }
         }
 
+
+    }
+    suspend fun checkAndCreateAdmin() {
         val adminUser = usersDao.getUsersAdmin().value
         if (adminUser == null || adminUser.isEmpty()) {
             createDefaultAdmin()
         }
     }
+
 
     suspend fun createDefaultAdmin() {
         withContext(Dispatchers.IO) {

@@ -25,6 +25,9 @@ interface CODao {
     @Query("DELETE FROM cabang_olahraga")
     fun deleteAllCO()
 
+    @Query("DELETE FROM cabang_olahraga WHERE id = :id")
+    fun deleteCOId(id: Int)
+
     @Query("SELECT * FROM cabang_olahraga ORDER BY id DESC")
     fun getAllCO() : LiveData<List<COEntity>>
     @Query("SELECT * FROM cabang_olahraga ORDER BY id DESC")

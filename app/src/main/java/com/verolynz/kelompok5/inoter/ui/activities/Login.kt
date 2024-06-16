@@ -13,21 +13,11 @@ import com.verolynz.kelompok5.inoter.utils.ExecutorsUtils
 import kotlinx.coroutines.launch
 
 class Login : AppCompatActivity() {
-    private lateinit var cODao: CODao
-    private lateinit var atletDao: AtletDao
-    private lateinit var usersDao: UsersDao
-    private lateinit var executorsUtils: ExecutorsUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val db = OlahragaDB.getDatabase(this)
-        cODao = db.CODao()
-        atletDao = db.AtletDao()
-        usersDao = db.UsersDao()
-        executorsUtils = ExecutorsUtils()
-        lifecycleScope.launch {
-            OlahragaRepository.getInstance(cODao, atletDao, usersDao, executorsUtils).initializeData(this@Login)
-        }
+
     }
 }
