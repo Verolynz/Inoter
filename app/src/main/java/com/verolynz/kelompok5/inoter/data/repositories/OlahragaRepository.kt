@@ -169,9 +169,9 @@ class OlahragaRepository private constructor(
             val coResponse = service.getAllCO().execute().body()
             if (coResponse != null) {
                 val coEntities = coResponse.toListCOEntity()
-                executorsUtils.diskIO().execute {
+
                     cODao.insertAllCO(coEntities)
-                }
+
 
             }
         }
@@ -182,9 +182,9 @@ class OlahragaRepository private constructor(
             val atletResponse = service.getAllAtlet().execute().body()
             if (atletResponse != null) {
                 val atletEntities = atletResponse.toListAtletEntity()
-                executorsUtils.diskIO().execute {
+
                     atletDao.insertAllAtlet(atletEntities)
-                }
+
 
             }
         }
