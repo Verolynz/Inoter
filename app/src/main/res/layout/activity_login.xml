@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="130dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="35dp"
         android:text="Menu Login"
         android:textColor="#434343"
         android:textSize="25sp"
@@ -169,6 +169,21 @@
                     android:backgroundTint="#649a5c"
                     android:fontFamily="@font/play_bold"
                     android:text="Masuk"></com.google.android.material.button.MaterialButton>
+
+
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="170dp"
+                    android:text="Sign In?"
+                    android:textColor="#434343"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 
 
