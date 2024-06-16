@@ -22,4 +22,10 @@ interface UsersDao {
 
     @Query("SELECT * FROM users")
     fun getAllUsers() : LiveData<List<UsersEntity>>
+
+    @Query("SELECT * FROM users WHERE username = 'admin'")
+    fun getUsersAdmin() : LiveData<List<UsersEntity>>
+
+    @Query("SELECT * FROM users WHERE username = :username AND password = :password")
+    fun getUsersAuth(username: String, password: String) : LiveData<List<UsersEntity>>
 }

@@ -8,4 +8,6 @@ interface ServiceAPI {
     fun getAllCO() : Call<List<COResponse>>
     @GET("Atlet")
     fun getAllAtlet() : Call<List<AtletResponse>>
+
+
 }
