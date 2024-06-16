@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.verolynz.kelompok5.inoter.data.local.AtletEntity
 import com.verolynz.kelompok5.inoter.data.local.COEntity
+import com.verolynz.kelompok5.inoter.data.local.UsersEntity
 import com.verolynz.kelompok5.inoter.data.remote.AtletResponse
 import com.verolynz.kelompok5.inoter.data.remote.COResponse
 import com.verolynz.kelompok5.inoter.data.repositories.OlahragaRepository
@@ -41,6 +42,19 @@ class OlahragaViewModels(private val olaharagaRepository: OlahragaRepository) : 
     fun deleteAtlet(atletEntity: AtletEntity) {
         olaharagaRepository.deleteAtlet(atletEntity)
     }
+    fun getAllUserslist(): LiveData<List<UsersEntity>> {
+        return olaharagaRepository.getAllUserslist()
+    }
+    fun insertUsers(usersEntity: UsersEntity) {
+        olaharagaRepository.insertUsers(usersEntity)
+    }
+    fun updateUsers(usersEntity: UsersEntity) {
+        olaharagaRepository.updateUsers(usersEntity)
+    }
+    fun deleteUsers(usersEntity: UsersEntity) {
+        olaharagaRepository.deleteUsers(usersEntity)
+    }
+
 
 
 

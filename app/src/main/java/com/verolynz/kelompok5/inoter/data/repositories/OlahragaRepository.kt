@@ -7,6 +7,8 @@ import com.verolynz.kelompok5.inoter.data.local.AtletDao
 import com.verolynz.kelompok5.inoter.data.local.AtletEntity
 import com.verolynz.kelompok5.inoter.data.local.CODao
 import com.verolynz.kelompok5.inoter.data.local.COEntity
+import com.verolynz.kelompok5.inoter.data.local.UsersDao
+import com.verolynz.kelompok5.inoter.data.local.UsersEntity
 import com.verolynz.kelompok5.inoter.data.remote.AtletResponse
 import com.verolynz.kelompok5.inoter.data.remote.COResponse
 import com.verolynz.kelompok5.inoter.data.remote.ConfigAPI
@@ -22,6 +24,7 @@ import retrofit2.Response
 class OlahragaRepository private constructor(
     private val cODao: CODao,
     private val atletDao: AtletDao,
+    private val usersDao: UsersDao,
     private val executorsUtils: ExecutorsUtils
 
 )  {
@@ -110,6 +113,18 @@ class OlahragaRepository private constructor(
         executorsUtils.diskIO().execute { atletDao.deleteAtlet(atletEntity) }
     }
 
+    fun insertUsers(usersEntity: UsersEntity) {
+        executorsUtils.diskIO().execute { usersDao.insertUsers(usersEntity) }
+    }
+    fun updateUsers(usersEntity: UsersEntity) {
+        executorsUtils.diskIO().execute { usersDao.updateUsers(usersEntity) }
+    }
+    fun deleteUsers(usersEntity: UsersEntity) {
+        executorsUtils.diskIO().execute { usersDao.deleteUsers(usersEntity) }
+    }
+    fun getAllUserslist(): LiveData<List<UsersEntity>> = usersDao.getAllUsers()
+
+
     fun getAllAtletlist(): LiveData<List<AtletEntity>> = atletDao.getAllAtlet()
     companion object {
         @Volatile
@@ -118,12 +133,13 @@ class OlahragaRepository private constructor(
         fun getInstance(
             cODao: CODao,
             atletDao: AtletDao,
+            usersDao: UsersDao,
             executorsUtils: ExecutorsUtils
         ): OlahragaRepository =
         // Jika instance sudah ada, kembalikan instance tersebut.
             // Jika instance belum ada, buat instance baru.
             instance ?: synchronized(this) {
-                instance ?: OlahragaRepository(cODao, atletDao, executorsUtils)
+                instance ?: OlahragaRepository(cODao, atletDao, usersDao ,executorsUtils)
             }.also { instance = it }
     }
 }
