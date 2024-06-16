@@ -71,6 +71,18 @@ class OlahragaRepository private constructor(
             }
         })
     }
+    private val serviceAPI = ConfigAPI.getApiService()
+    suspend fun createCO(co: COResponse): COResponse {
+        return serviceAPI.createCO(co).execute().body() ?: throw Exception("Failed to create CO")
+    }
+
+    suspend fun updateCO(id: String, co: COResponse): COResponse {
+        return serviceAPI.updateCO(id, co).execute().body() ?: throw Exception("Failed to update CO")
+    }
+
+    suspend fun deleteCO(id: String) {
+        serviceAPI.deleteCO(id).execute()
+    }
     fun getAllAtlet() {
         val service = ConfigAPI.getApiService().getAllAtlet()
         service.enqueue(object : Callback<List<AtletResponse>> {
@@ -99,6 +111,19 @@ class OlahragaRepository private constructor(
             }
         })
     }
+    suspend fun createAtlet(atlet: AtletResponse): AtletResponse {
+        return serviceAPI.createAtlet(atlet).execute().body() ?: throw Exception("Failed to create Atlet")
+    }
+
+
+    suspend fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
+        return serviceAPI.updateAtlet(id, atlet).execute().body() ?: throw Exception("Failed to update Atlet")
+    }
+
+    suspend fun deleteAtlet(id: String) {
+        serviceAPI.deleteAtlet(id).execute()
+    }
+
     fun insertCO(coEntity: COEntity) {
         executorsUtils.diskIO().execute { cODao.insertCO(coEntity) }
     }
@@ -144,7 +169,10 @@ class OlahragaRepository private constructor(
             val coResponse = service.getAllCO().execute().body()
             if (coResponse != null) {
                 val coEntities = coResponse.toListCOEntity()
-                cODao.insertAllCO(coEntities)
+                executorsUtils.diskIO().execute {
+                    cODao.insertAllCO(coEntities)
+                }
+
             }
         }
     }
@@ -154,7 +182,10 @@ class OlahragaRepository private constructor(
             val atletResponse = service.getAllAtlet().execute().body()
             if (atletResponse != null) {
                 val atletEntities = atletResponse.toListAtletEntity()
-                atletDao.insertAllAtlet(atletEntities)
+                executorsUtils.diskIO().execute {
+                    atletDao.insertAllAtlet(atletEntities)
+                }
+
             }
         }
 
@@ -229,9 +260,6 @@ class OlahragaRepository private constructor(
             }
         })
     }
-
-
-
 
 
 
