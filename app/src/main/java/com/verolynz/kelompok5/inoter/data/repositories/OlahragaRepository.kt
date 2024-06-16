@@ -75,47 +75,47 @@ class OlahragaRepository private constructor(
             }
         })
     }
-    fun createCO(co: COResponse): COResponse {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.createCO(co).execute()
-        if (response.isSuccessful) {
-            val responseBody = response.body()
-            if (responseBody != null) {
-                executorsUtils.diskIO().execute {
-                    cODao.insertCO(responseBody.toCOEntity())
-                }
-                return responseBody
-            }
-        }
-        throw Exception("Failed to create CO")
-    }
+//    fun createCO(co: COResponse): COResponse {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.createCO(co).execute()
+//        if (response.isSuccessful) {
+//            val responseBody = response.body()
+//            if (responseBody != null) {
+//                executorsUtils.diskIO().execute {
+//                    cODao.insertCO(responseBody.toCOEntity())
+//                }
+//                return responseBody
+//            }
+//        }
+//        throw Exception("Failed to create CO")
+//    }
 
-    fun updateCO(id: String, co: COResponse): COResponse {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.updateCO(id, co).execute()
-        if (response.isSuccessful) {
-            val responseBody = response.body()
-            if (responseBody != null) {
-                executorsUtils.diskIO().execute {
-                    cODao.updateCO(responseBody.toCOEntity())
-                }
-                return responseBody
-            }
-        }
-        throw Exception("Failed to update CO")
-    }
+//    fun updateCO(id: String, co: COResponse): COResponse {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.updateCO(id, co).execute()
+//        if (response.isSuccessful) {
+//            val responseBody = response.body()
+//            if (responseBody != null) {
+//                executorsUtils.diskIO().execute {
+//                    cODao.updateCO(responseBody.toCOEntity())
+//                }
+//                return responseBody
+//            }
+//        }
+//        throw Exception("Failed to update CO")
+//    }
 
-    fun deleteCO(id: String) {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.deleteCO(id).execute()
-        if (response.isSuccessful) {
-            executorsUtils.diskIO().execute {
-                cODao.deleteCOId(id.toInt())
-            }
-        } else {
-            throw Exception("Failed to delete CO")
-        }
-    }
+//    fun deleteCO(id: String) {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.deleteCO(id).execute()
+//        if (response.isSuccessful) {
+//            executorsUtils.diskIO().execute {
+//                cODao.deleteCOId(id.toInt())
+//            }
+//        } else {
+//            throw Exception("Failed to delete CO")
+//        }
+//    }
     fun getAllAtlet() {
         val service = ConfigAPI.getApiService().getAllAtlet()
         service.enqueue(object : Callback<List<AtletResponse>> {
@@ -144,48 +144,48 @@ class OlahragaRepository private constructor(
             }
         })
     }
-    fun createAtlet(atlet: AtletResponse): AtletResponse {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.createAtlet(atlet).execute()
-        if (response.isSuccessful) {
-            val responseBody = response.body()
-            if (responseBody != null) {
-                executorsUtils.diskIO().execute {
-                    atletDao.insertAtlet(responseBody.toAtletEntity())
-                }
-                return responseBody
-            }
-        }
-        throw Exception("Failed to create Atlet")
-    }
+//    fun createAtlet(atlet: AtletResponse): AtletResponse {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.createAtlet(atlet).execute()
+//        if (response.isSuccessful) {
+//            val responseBody = response.body()
+//            if (responseBody != null) {
+//                executorsUtils.diskIO().execute {
+//                    atletDao.insertAtlet(responseBody.toAtletEntity())
+//                }
+//                return responseBody
+//            }
+//        }
+//        throw Exception("Failed to create Atlet")
+//    }
 
 
-    fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.updateAtlet(id, atlet).execute()
-        if (response.isSuccessful) {
-            val responseBody = response.body()
-            if (responseBody != null) {
-                executorsUtils.diskIO().execute {
-                    atletDao.updateAtlet(responseBody.toAtletEntity())
-                }
-                return responseBody
-            }
-        }
-        throw Exception("Failed to update Atlet")
-    }
+//    fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.updateAtlet(id, atlet).execute()
+//        if (response.isSuccessful) {
+//            val responseBody = response.body()
+//            if (responseBody != null) {
+//                executorsUtils.diskIO().execute {
+//                    atletDao.updateAtlet(responseBody.toAtletEntity())
+//                }
+//                return responseBody
+//            }
+//        }
+//        throw Exception("Failed to update Atlet")
+//    }
 
-    fun deleteAtlet(id: String) {
-        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-        val response = serviceAPI.deleteAtlet(id).execute()
-        if (response.isSuccessful) {
-            executorsUtils.diskIO().execute {
-                atletDao.deleteAtletId(id.toInt())
-            }
-        } else {
-            throw Exception("Failed to delete Atlet")
-        }
-    }
+//    fun deleteAtlet(id: String) {
+//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+//        val response = serviceAPI.deleteAtlet(id).execute()
+//        if (response.isSuccessful) {
+//            executorsUtils.diskIO().execute {
+//                atletDao.deleteAtletId(id.toInt())
+//            }
+//        } else {
+//            throw Exception("Failed to delete Atlet")
+//        }
+//    }
 
     fun insertCO(coEntity: COEntity) {
         executorsUtils.diskIO().execute { cODao.insertCO(coEntity) }
@@ -226,46 +226,6 @@ class OlahragaRepository private constructor(
 
     fun getAllAtletlist(): LiveData<List<AtletEntity>> = atletDao.getAllAtlet()
 
-//    suspend fun APItoDBCOData() {
-//        withContext(Dispatchers.IO) {
-//            val service = ConfigAPI.getApiService()
-//            val coResponse = service.getAllCO().execute().body()
-//            if (coResponse != null) {
-//                val coEntities = coResponse.toListCOEntity()
-//
-//                    cODao.insertAllCO(coEntities)
-//
-//
-//            }
-//        }
-//    }
-//    suspend fun APItoDBAtletData() {
-//        withContext(Dispatchers.IO) {
-//            val service = ConfigAPI.getApiService()
-//            val atletResponse = service.getAllAtlet().execute().body()
-//            if (atletResponse != null) {
-//                val atletEntities = atletResponse.toListAtletEntity()
-//
-//                    atletDao.insertAllAtlet(atletEntities)
-//
-//
-//            }
-//        }
-//
-//    }
-
-//    suspend fun initializeData(context: Context) {
-//        if (NetworkUtils.isConnectedToInternet(context)) {
-//            APItoDBCOData()
-//            APItoDBAtletData()
-//        } else {
-//            withContext(Dispatchers.Main) {
-//                Toast.makeText(context, "Tidak terhubung dengan jaringan", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//
-//    }
     fun checkAndCreateAdmin() {
         val adminUser = usersDao.getUsersAdmin().value
         if (adminUser == null || adminUser.isEmpty()) {
@@ -305,28 +265,20 @@ class OlahragaRepository private constructor(
 
     fun loginAuth(username: String, password: String, context: Context) {
         usersDao.getUsersAuth(username, password).observe(context as LifecycleOwner, { users ->
-            if (users.isNotEmpty()) {
-                val user = users[0]
-                when (user.role) {
-                    "admin" -> {
-                        // Navigasi ke AdminActivity
+            if (users != null) {
+                if (users.username == username && users.password == password) {
+                    if (users.role == "admin") {
                         val intent = Intent(context, AdminMainActivity::class.java)
                         context.startActivity(intent)
+                    } else {
+                        Toast.makeText(context, "Anda login sebagai user", Toast.LENGTH_SHORT).show()
                     }
-                    "user" -> {
-//                        // Navigasi ke UserActivity
-//                        val intent = Intent(context, UserActivity::class.java)
-//                        context.startActivity(intent)
-                    }
+                } else {
+                    Toast.makeText(context, "Username atau password salah", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                    Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
-
             }
         })
     }
-
-
 
     companion object {
         @Volatile
