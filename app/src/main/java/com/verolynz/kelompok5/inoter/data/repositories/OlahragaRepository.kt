@@ -1,6 +1,6 @@
 package com.verolynz.kelompok5.inoter.data.repositories
 
-import android.app.Service
+
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.lifecycleScope
+
 import com.verolynz.kelompok5.inoter.data.local.AtletDao
 import com.verolynz.kelompok5.inoter.data.local.AtletEntity
 import com.verolynz.kelompok5.inoter.data.local.CODao
