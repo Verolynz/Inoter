@@ -29,6 +29,13 @@
         <activity
             android:name=".ui.activities.AdminMainActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.SeeMoreArtkelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.AddArtikel"
+            android:exported="false" />
+
     </application>
 
 </manifest>

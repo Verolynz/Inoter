@@ -15,24 +15,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/quicksand_medium"
-            android:text="Selamat Pagi,Martin"
-            android:textSize="14sp"
+            android:text="Selamat Pagi,Admin"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/baseline_sunny_24"
+            android:textSize="16sp"
             android:layout_marginBottom="6dp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="14sp"
             android:layout_marginBottom="6dp"
             android:textColor="@color/black"
-            android:text="Mari Jelajahi Olahraga Favoritmu"/>
+            android:text="Mari Manajemen Aplikasi Mu"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvartikel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="0dp"
+            tools:listitem="@layout/rvartikelmainactivity" />
+
+
+        <TextView
+            android:id="@+id/lihatartikel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manajemen Artikel"
+            android:textSize="13sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textColor="@color/grey"/>
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"
+            android:text="Daftar Olahraga :"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:listitem="@layout/rvartikelmainactivity"/>
+            app:spanCount="3"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/rvolahraga"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manajemen Olahraga"
+            android:textSize="13sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textColor="@color/grey"/>
+
+
+
 
     </LinearLayout>
+
 
 
 </LinearLayout>
