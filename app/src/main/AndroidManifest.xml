@@ -48,6 +48,9 @@
         <activity
             android:name=".ui.activities.DetailArtikelActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.DetailCOActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

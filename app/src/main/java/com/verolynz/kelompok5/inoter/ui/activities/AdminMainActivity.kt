@@ -88,19 +88,15 @@ class AdminMainActivity : AppCompatActivity() {
                 }
                 coAdapter.setOnItemClickCallback(object : COAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: COEntity) {
-//                        val intent = Intent(this@AdminMainActivity, DetailCOActivity::class.java)
-//                        intent.putExtra(DetailCOActivity.EXTRA_CO, data)
-//                        startActivity(intent)
+                        showSelectedOlahraga(data)
                     }
 
                     override fun onDelete(data: COEntity, position: Int) {
-//                        olahragaViewModel.deleteCO(data)
+//
                     }
 
                     override fun onUpdate(data: COEntity) {
-//                        val intent = Intent(this@AdminMainActivity, AddEditCOActivity::class.java)
-//                        intent.putExtra(AddEditCOActivity.EXTRA_CO, data)
-//                        startActivity(intent)
+//
                     }
                 })
             }
@@ -128,6 +124,15 @@ class AdminMainActivity : AppCompatActivity() {
         }
 
         navigateToDetail.putExtra("artikel_image", imageUriString)
+
+        startActivity(navigateToDetail)
+    }
+
+    private fun showSelectedOlahraga(data: COEntity) {
+        val navigateToDetail = Intent(this, DetailCOActivity::class.java)
+
+        navigateToDetail.putExtra("name", data.name)
+        navigateToDetail.putExtra("deskripsi", data.deskripsi)
 
         startActivity(navigateToDetail)
     }
