@@ -22,6 +22,9 @@ interface AtletDao {
     @Query("DELETE FROM atlet")
     fun deleteAllAtlet()
 
+    @Query("DELETE FROM atlet WHERE id = :id")
+    fun deleteAtletById(id: Int)
+
     @Query("SELECT * FROM atlet ORDER BY id DESC")
     fun getAllAtlet() : LiveData<List<AtletEntity>>
     @Query("SELECT * FROM atlet ORDER BY id DESC")

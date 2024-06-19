@@ -19,7 +19,7 @@ class ConfigAPI {
             // Membuat instance Retrofit
             val retrofit = Retrofit.Builder()
                 // Menentukan base URL untuk request API
-                .baseUrl("https://666a946d7013419182cfe0f7.mockapi.io/Inoter")
+                .baseUrl("https://666a946d7013419182cfe0f7.mockapi.io/")
                 // Menambahkan converter factory untuk mengubah response menjadi objek Gson
                 .addConverterFactory(GsonConverterFactory.create())
                 // Menentukan client HTTP untuk Retrofit

@@ -75,47 +75,68 @@ class OlahragaRepository private constructor(
             }
         })
     }
-//    fun createCO(co: COResponse): COResponse {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.createCO(co).execute()
-//        if (response.isSuccessful) {
-//            val responseBody = response.body()
-//            if (responseBody != null) {
-//                executorsUtils.diskIO().execute {
-//                    cODao.insertCO(responseBody.toCOEntity())
-//                }
-//                return responseBody
-//            }
-//        }
-//        throw Exception("Failed to create CO")
-//    }
+    fun createCO(co: COResponse) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        serviceAPI.postCO(co).enqueue(object : Callback<COResponse> {
+            override fun onResponse(call: Call<COResponse>, response: Response<COResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        executorsUtils.diskIO().execute {
+                            cODao.insertCO(responseBody.toCOEntity())
+                        }
+                    }
+                } else {
+                    Log.e("Error", "Failed to create CO")
+                }
+            }
 
-//    fun updateCO(id: String, co: COResponse): COResponse {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.updateCO(id, co).execute()
-//        if (response.isSuccessful) {
-//            val responseBody = response.body()
-//            if (responseBody != null) {
-//                executorsUtils.diskIO().execute {
-//                    cODao.updateCO(responseBody.toCOEntity())
-//                }
-//                return responseBody
-//            }
-//        }
-//        throw Exception("Failed to update CO")
-//    }
+            override fun onFailure(call: Call<COResponse>, t: Throwable) {
+                Log.e("Error", "Network error", t)
+            }
+        })
+    }
 
-//    fun deleteCO(id: String) {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.deleteCO(id).execute()
-//        if (response.isSuccessful) {
-//            executorsUtils.diskIO().execute {
-//                cODao.deleteCOId(id.toInt())
-//            }
-//        } else {
-//            throw Exception("Failed to delete CO")
-//        }
-//    }
+    fun updateCO(id: Int, co: COResponse) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        serviceAPI.putCO(id, co).enqueue(object : Callback<COResponse> {
+            override fun onResponse(call: Call<COResponse>, response: Response<COResponse>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        executorsUtils.diskIO().execute {
+                            cODao.updateCO(responseBody.toCOEntity())
+                        }
+                    }
+                } else {
+                    Log.e("Error", "Failed to update CO")
+                }
+            }
+
+            override fun onFailure(call: Call<COResponse>, t: Throwable) {
+                Log.e("Error", "Network error", t)
+            }
+        })
+    }
+
+    fun deleteCO(id: Int) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        serviceAPI.deleteCO(id).enqueue(object : Callback<COResponse> {
+            override fun onResponse(call: Call<COResponse>, response: Response<COResponse>) {
+                if (response.isSuccessful) {
+                    executorsUtils.diskIO().execute {
+                        cODao.deleteCOById(id)
+                    }
+                } else {
+                    Log.e("Error", "Failed to delete CO")
+                }
+            }
+
+            override fun onFailure(call: Call<COResponse>, t: Throwable) {
+                Log.e("Error", "Network error", t)
+            }
+        })
+    }
     fun getAllAtlet() {
         val service = ConfigAPI.getApiService().getAllAtlet()
         service.enqueue(object : Callback<List<AtletResponse>> {
@@ -144,48 +165,48 @@ class OlahragaRepository private constructor(
             }
         })
     }
-//    fun createAtlet(atlet: AtletResponse): AtletResponse {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.createAtlet(atlet).execute()
-//        if (response.isSuccessful) {
-//            val responseBody = response.body()
-//            if (responseBody != null) {
-//                executorsUtils.diskIO().execute {
-//                    atletDao.insertAtlet(responseBody.toAtletEntity())
-//                }
-//                return responseBody
-//            }
-//        }
-//        throw Exception("Failed to create Atlet")
-//    }
+    fun createAtlet(atlet: AtletResponse): AtletResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.postAtlet(atlet).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    atletDao.insertAtlet(responseBody.toAtletEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to create Atlet")
+    }
 
 
-//    fun updateAtlet(id: String, atlet: AtletResponse): AtletResponse {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.updateAtlet(id, atlet).execute()
-//        if (response.isSuccessful) {
-//            val responseBody = response.body()
-//            if (responseBody != null) {
-//                executorsUtils.diskIO().execute {
-//                    atletDao.updateAtlet(responseBody.toAtletEntity())
-//                }
-//                return responseBody
-//            }
-//        }
-//        throw Exception("Failed to update Atlet")
-//    }
+    fun updateAtlet(id: Int, atlet: AtletResponse): AtletResponse {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.putAtlet(id, atlet).execute()
+        if (response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody != null) {
+                executorsUtils.diskIO().execute {
+                    atletDao.updateAtlet(responseBody.toAtletEntity())
+                }
+                return responseBody
+            }
+        }
+        throw Exception("Failed to update Atlet")
+    }
 
-//    fun deleteAtlet(id: String) {
-//        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
-//        val response = serviceAPI.deleteAtlet(id).execute()
-//        if (response.isSuccessful) {
-//            executorsUtils.diskIO().execute {
-//                atletDao.deleteAtletId(id.toInt())
-//            }
-//        } else {
-//            throw Exception("Failed to delete Atlet")
-//        }
-//    }
+    fun deleteAtlet(id: Int) {
+        val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
+        val response = serviceAPI.deleteAtlet(id).execute()
+        if (response.isSuccessful) {
+            executorsUtils.diskIO().execute {
+                atletDao.deleteAtletById(id)
+            }
+        } else {
+            throw Exception("Failed to delete Atlet")
+        }
+    }
 
     fun insertCO(coEntity: COEntity) {
         executorsUtils.diskIO().execute { cODao.insertCO(coEntity) }
