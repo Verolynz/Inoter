@@ -55,11 +55,16 @@ class DetailArtikelActivity : AppCompatActivity() {
             // Jika drawable tidak null, Anda dapat mengonversinya menjadi Bitmap
             if (drawable != null) {
                 val bitmap: Bitmap = (drawable as BitmapDrawable).bitmap
+                val message = "Saya melihat artikel ini di aplikasi Inoter:\n\n" +
+                        "Judul Artikel: $getDataName\n" +
+                        "Isi: $getDataDescription" +
+                        "*UNDUH APIKASI INOTER DI LAMAN RESMI : INOTER.COM/APP*"
 
                 // Sekarang Anda dapat menggunakan bitmap ini dalam Intent untuk dibagikan
                 val sendIntent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, "$getDataName, $getDataDescription")
+                    putExtra(Intent.EXTRA_TEXT, message)
+                    type = "text/plain"
                     putExtra(Intent.EXTRA_STREAM, getImageUri(this@DetailArtikelActivity, bitmap))
                     type = "image/*"
                 }
