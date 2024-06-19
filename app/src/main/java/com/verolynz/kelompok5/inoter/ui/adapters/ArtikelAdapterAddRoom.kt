@@ -1,5 +1,3 @@
-package com.verolynz.kelompok5.inoter.ui.adapters
-
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +12,17 @@ import com.verolynz.kelompok5.inoter.room.ArtikelDatabase
 class ArtikelAdapterAddRoom(private var artikelList: List<ArtikelDatabase>) :
     RecyclerView.Adapter<ArtikelAdapterAddRoom.ArtikelViewHolder>() {
 
-    // Deklarasi variabel untuk callback ketika item diklik
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    // Fungsi untuk mengatur callback ketika item diklik
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    // Interface untuk callback ketika item diklik
     interface OnItemClickCallback {
         fun onItemClicked(data: ArtikelDatabase)
         fun onMoreClicked(data: ArtikelDatabase, position: Int)
     }
 
-    // Kelas ViewHolder untuk menyimpan referensi view yang digunakan dalam RecyclerView
     class ArtikelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val artikelName: TextView = itemView.findViewById(R.id.textViewTitle)
         val artikelDescription: TextView = itemView.findViewById(R.id.textViewDescription)
@@ -36,41 +30,33 @@ class ArtikelAdapterAddRoom(private var artikelList: List<ArtikelDatabase>) :
         val btnMore: ImageButton = itemView.findViewById(R.id.edit)
     }
 
-    // Fungsi untuk membuat ViewHolder (Melakukan setting untuk XML yang akan kita gunakan untuk menampilkan data)
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ArtikelViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.rvarticlewithbtnmore, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtikelViewHolder {
+        val view: View = LayoutInflater.from(parent.context)
+            .inflate(R.layout.rvarticlewithbtnmore, parent, false)
         return ArtikelViewHolder(view)
     }
 
-    // Fungsi untuk mengikat data dengan ViewHolder (memasukkan data yang kita miliki ke dalam XML ViewHolder)
     override fun onBindViewHolder(holder: ArtikelViewHolder, position: Int) {
         val data = artikelList[position]
 
         holder.artikelName.text = data.name
         holder.artikelDescription.text = data.description.shorten(85)
 
-        // Mengatur image
-        val uri = Uri.fromFile(data.image)
+        // Mengatur gambar dari Uri
+        val uri = Uri.parse(data.image.toString()) // Data.image di sini berupa String URI
         holder.artikelImage.setImageURI(uri)
 
-        // mengatur aksi ketika button more di klik
-        holder.btnMore.setOnClickListener { onItemClickCallback.onMoreClicked(artikelList [holder.layoutPosition], holder.absoluteAdapterPosition) }
+        holder.btnMore.setOnClickListener {
+            onItemClickCallback.onMoreClicked(data, holder.absoluteAdapterPosition)
+        }
 
-
-        // Mengatur aksi ketika item diklik
         holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(artikelList[holder.adapterPosition])
+            onItemClickCallback.onItemClicked(data)
         }
     }
 
-    // Fungsi untuk mendapatkan jumlah item
     override fun getItemCount(): Int = artikelList.size
 
-    // Fungsi untuk memendekkan teks jika melebihi panjang maksimum
     private fun String.shorten(maxLength: Int): String {
         return if (this.length <= maxLength) this else "${this.substring(0, maxLength)}..."
     }
