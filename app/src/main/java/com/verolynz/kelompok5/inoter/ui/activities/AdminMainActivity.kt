@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -24,6 +25,7 @@ import com.verolynz.kelompok5.inoter.ui.adapters.ArtikelAdapterRoom
 import com.verolynz.kelompok5.inoter.ui.adapters.COAdapter
 import java.io.File
 import com.verolynz.kelompok5.inoter.utils.ExecutorsUtils
+import java.time.LocalTime
 
 class AdminMainActivity : AppCompatActivity() {
     private lateinit var appViewModel: AppViewModel
@@ -36,6 +38,35 @@ class AdminMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val jambukaapk = LocalTime.now()
+        val earlyMorning = LocalTime.of(5, 0)
+        val noon = LocalTime.of(12, 0)
+        val evening = LocalTime.of(18, 0)
+        val night = LocalTime.of(23, 59) // Representing midnight
+
+        val greetingtext = findViewById<TextView>(R.id.salam)
+        val sun = findViewById<ImageView>(R.id.sun)
+
+        when {
+            jambukaapk.isBefore(earlyMorning) -> {
+                sun.setImageResource(0)
+                greetingtext.text = "Selamat Subuh"
+            }
+            jambukaapk.isBefore(noon) -> {
+                greetingtext.text = "Selamat Pagi"
+            }
+            jambukaapk.isBefore(evening) -> {
+                greetingtext.text = "Selamat Siang"
+            }
+            jambukaapk.isBefore(night) -> {
+                sun.setImageResource(R.drawable.baseline_nights_stay_24)
+                greetingtext.text = "Selamat Malam "
+            }
+            else -> {
+                // Optional: handle the case for exactly midnight if needed
+                greetingtext.text = "Selamat Malam"
+            }
+        }
         val olahragafactory = ViewModelFactory.getInstance(this)
         val olahragaViewModel = ViewModelProvider(this, olahragafactory)[OlahragaViewModels::class.java]
         val cODao = OlahragaDB.getDatabase(this).CODao()
