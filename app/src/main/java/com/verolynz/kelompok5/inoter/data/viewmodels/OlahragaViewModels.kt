@@ -26,6 +26,7 @@ class OlahragaViewModels(private val olaharagaRepository: OlahragaRepository) : 
     fun deleteCO(coEntity: COEntity) {
         olaharagaRepository.deleteCO(coEntity)
     }
+
     fun getAllAtlet() {
         olaharagaRepository.getAllAtlet()
     }
