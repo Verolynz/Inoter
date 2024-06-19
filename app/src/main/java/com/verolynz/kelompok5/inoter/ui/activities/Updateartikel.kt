@@ -145,7 +145,7 @@ class Updateartikel : AppCompatActivity() {
         // Mengubah URI gambar menjadi file dan mengurangi ukuran file
         val imageFile = currentImageUri?.let { uriToFile(it, this).reduceFileImage() }
 
-        val artikel = imageFile?.let {
+        val artikel = (if (currentImageUri != null) imageFile else oldPhoto)?.let { imageFile ->
             ArtikelDatabase(
                 id = getData.id,
                 name = artikelName.text.toString(),
