@@ -29,4 +29,6 @@ interface AtletDao {
     fun getAllAtlet() : LiveData<List<AtletEntity>>
     @Query("SELECT * FROM atlet ORDER BY id DESC")
     fun getAllAtletList() : List<AtletEntity>
+    @Query("SELECT * FROM atlet WHERE idCO = :id")
+    fun getatletByIdCO(id: Int) : LiveData<List<AtletEntity>>
 }

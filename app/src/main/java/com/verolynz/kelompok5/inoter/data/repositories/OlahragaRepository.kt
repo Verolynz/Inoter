@@ -165,6 +165,7 @@ class OlahragaRepository private constructor(
             }
         })
     }
+
     fun createAtlet(atlet: AtletResponse): AtletResponse {
         val serviceAPI: ServiceAPI = ConfigAPI.getApiService()
         val response = serviceAPI.postAtlet(atlet).execute()
@@ -247,6 +248,13 @@ class OlahragaRepository private constructor(
 
 
     fun getAllAtletlist(): LiveData<List<AtletEntity>> = atletDao.getAllAtlet()
+
+    fun getAtletbyidCO(id: Int): LiveData<List<AtletEntity>> {
+        Log.d("OlahragaRepository", "Fetching Atlet by CO id: $id")
+        val data = atletDao.getatletByIdCO(id)
+        Log.d("OlahragaRepository", "Fetched Atlet data: $data")
+        return data
+    }
 
     fun checkAndCreateAdmin() {
         val adminUser = usersDao.getUsersAdmin().value

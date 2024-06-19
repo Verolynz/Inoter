@@ -11,11 +11,15 @@ import com.verolynz.kelompok5.inoter.data.repositories.OlahragaRepository
 class OlahragaViewModels(private val olaharagaRepository: OlahragaRepository) : ViewModel(){
     val listCO: LiveData<List<COResponse>> = olaharagaRepository.listCO
     val ListAtlet: LiveData<List<AtletResponse>> = olaharagaRepository.listAtlet
+
     fun getAllCO() {
          olaharagaRepository.getAllCO()
     }
     fun getAllCOlist(): LiveData<List<COEntity>> {
         return olaharagaRepository.getAllCOlist()
+    }
+    fun getAtletbyidCO(id: Int):LiveData<List<AtletEntity>> {
+        return olaharagaRepository.getAtletbyidCO(id)
     }
     fun insertCO(coEntity: COEntity) {
         olaharagaRepository.insertCO(coEntity)

@@ -30,7 +30,6 @@ class AdminMainActivity : AppCompatActivity() {
     private lateinit var artikelAdapterRoom: ArtikelAdapterRoom
     private lateinit var recyclerView: RecyclerView
     private lateinit var olahragaViewModel: OlahragaViewModels
-//    private lateinit var olahragaAdapter: OlahragaAdapter
     private lateinit var recyclerViewOlahraga: RecyclerView
     private lateinit var olaharagaRepository: OlahragaRepository
 
@@ -45,6 +44,7 @@ class AdminMainActivity : AppCompatActivity() {
         val executorsUtils = ExecutorsUtils()
         olaharagaRepository = OlahragaRepository.getInstance(cODao, atletDao, usersDao, executorsUtils)
         olaharagaRepository.getAllCO()
+        olaharagaRepository.getAllAtlet()
         // Mendapatkan instance ViewModel
         val factory = RoomViewModelFactory.getInstance(this)
         appViewModel = ViewModelProvider(this, factory)[AppViewModel::class.java]
@@ -107,14 +107,16 @@ class AdminMainActivity : AppCompatActivity() {
         lihatArtikel.setOnClickListener {
             val intent = Intent(this, SeeMoreArtkelActivity::class.java)
             startActivity(intent)
+
         }
     }
 
     private fun showSelectedArtikel(data: ArtikelDatabase) {
         val navigateToDetail = Intent(this, DetailArtikelActivity::class.java)
-
+        navigateToDetail.putExtra("id", data.id)
         navigateToDetail.putExtra("judul", data.name)
         navigateToDetail.putExtra("deskripsi", data.description)
+
 
         // Mengonversi data.image ke String URI
         val imageUriString = if (data.image is File) {
@@ -126,15 +128,17 @@ class AdminMainActivity : AppCompatActivity() {
         navigateToDetail.putExtra("artikel_image", imageUriString)
 
         startActivity(navigateToDetail)
+
     }
 
     private fun showSelectedOlahraga(data: COEntity) {
         val navigateToDetail = Intent(this, DetailCOActivity::class.java)
-
+        navigateToDetail.putExtra("id", data.id)
         navigateToDetail.putExtra("name", data.name)
         navigateToDetail.putExtra("deskripsi", data.deskripsi)
 
         startActivity(navigateToDetail)
+
     }
 
 }

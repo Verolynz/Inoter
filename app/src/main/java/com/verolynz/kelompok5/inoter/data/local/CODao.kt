@@ -32,4 +32,7 @@ interface CODao {
     fun getAllCO() : LiveData<List<COEntity>>
     @Query("SELECT * FROM cabang_olahraga ORDER BY id DESC")
     fun getAllCOList() : List<COEntity>
+
+
+
 }

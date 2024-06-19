@@ -46,7 +46,7 @@ class DetailArtikelActivity : AppCompatActivity() {
 
         // Mendapatkan referensi ke tombol bagikan
         val btnShare = findViewById<ImageButton>(R.id.bagikan_btn1)
-
+        val back = findViewById<ImageButton>(R.id.back_button)
         // Menetapkan aksi ketika tombol bagikan diklik
         btnShare.setOnClickListener {
             // Mendapatkan Drawable dari ImageView
@@ -75,6 +75,14 @@ class DetailArtikelActivity : AppCompatActivity() {
                 // Handle jika drawable null
                 Toast.makeText(this, "Gambar tidak tersedia", Toast.LENGTH_SHORT).show()
             }
+        }
+
+
+        back.setOnClickListener {
+            val intent = Intent(this, AdminMainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
         }
     }
 
