@@ -43,7 +43,7 @@ class COAdapter(private var coList: List<COEntity>) :
         viewType: Int
     ): COViewHolder {
         val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.rvolahraga, parent, false)
         return COViewHolder(view)
     }
 
@@ -51,22 +51,22 @@ class COAdapter(private var coList: List<COEntity>) :
     override fun onBindViewHolder(holder: COViewHolder, position: Int) {
         val data = coList[position]
 
-//        holder.foodName.text = data.name
+        holder.COName.text = data.name
 //        holder.foodCategory.text = data.kategori
 
         // Mengatur aksi ketika item diklik
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(coList[holder.adapterPosition]) }
 
-        // Mengatur aksi ketika button dihapus
-        holder.btnHapus.setOnClickListener {
-            onItemClickCallback.onDelete(
-                coList[holder.adapterPosition],
-                holder.adapterPosition
-            )
-        }
+//        // Mengatur aksi ketika button dihapus
+//        holder.btnHapus.setOnClickListener {
+//            onItemClickCallback.onDelete(
+//                coList[holder.adapterPosition],
+//                holder.adapterPosition
+//            )
+//        }
 
-        // Mengatur aksi ketika button diupdate
-        holder.btnEdit.setOnClickListener { onItemClickCallback.onUpdate(coList[holder.adapterPosition]) }
+//        // Mengatur aksi ketika button diupdate
+//        holder.btnEdit.setOnClickListener { onItemClickCallback.onUpdate(coList[holder.adapterPosition]) }
 
     }
 

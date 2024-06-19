@@ -12,7 +12,7 @@ class OlahragaViewModels(private val olaharagaRepository: OlahragaRepository) : 
     val listCO: LiveData<List<COResponse>> = olaharagaRepository.listCO
     val ListAtlet: LiveData<List<AtletResponse>> = olaharagaRepository.listAtlet
     fun getAllCO() {
-        olaharagaRepository.getAllCO()
+         olaharagaRepository.getAllCO()
     }
     fun getAllCOlist(): LiveData<List<COEntity>> {
         return olaharagaRepository.getAllCOlist()
@@ -28,7 +28,7 @@ class OlahragaViewModels(private val olaharagaRepository: OlahragaRepository) : 
     }
 
     fun getAllAtlet() {
-        olaharagaRepository.getAllAtlet()
+        return olaharagaRepository.getAllAtlet()
     }
     fun getAllAtletlist(): LiveData<List<AtletEntity>> {
         return olaharagaRepository.getAllAtletlist()

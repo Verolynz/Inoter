@@ -5,6 +5,6 @@ import java.time.LocalDateTime
 data class COResponse(
     val name: String,
     val deskripsi: String,
-    val dibuat: LocalDateTime,
+    val dibuat: String,
     val id: String
 )

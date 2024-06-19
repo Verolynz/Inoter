@@ -13,21 +13,21 @@ data class COEntity (
     val id: Int,
     val name: String,
     val deskripsi: String,
-    val dibuat: LocalDateTime
+    val dibuat: String
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
-        LocalDateTime.parse(parcel.readString()!!, DateTimeFormatter.ISO_DATE_TIME)
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(deskripsi)
-        parcel.writeString(dibuat.format(DateTimeFormatter.ISO_DATE_TIME))
+        parcel.writeString(dibuat)
     }
 
     override fun describeContents(): Int {

@@ -1,14 +1,10 @@
 package com.verolynz.kelompok5.inoter.utils
 
-import android.content.Context
+
 import com.verolynz.kelompok5.inoter.data.local.AtletEntity
 import com.verolynz.kelompok5.inoter.data.local.COEntity
 import com.verolynz.kelompok5.inoter.data.remote.AtletResponse
 import com.verolynz.kelompok5.inoter.data.remote.COResponse
-import com.verolynz.kelompok5.inoter.room.AppDatabase
-import com.verolynz.kelompok5.inoter.room.AppRepository
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 fun List<COResponse>.toListCOEntity(): List<COEntity> =
     map{
@@ -16,7 +12,7 @@ fun List<COResponse>.toListCOEntity(): List<COEntity> =
             id = it.id.toInt(),
             name = it.name,
             deskripsi = it.deskripsi,
-            dibuat = LocalDateTime.parse(it.dibuat.toString(), DateTimeFormatter.ISO_DATE_TIME)
+            dibuat = it.dibuat
         )
     }
 fun List<AtletResponse>.toListAtletEntity(): List<AtletEntity> =
@@ -25,8 +21,8 @@ fun List<AtletResponse>.toListAtletEntity(): List<AtletEntity> =
             id = it.id.toInt(),
             name = it.name,
             deskripsi = it.deskripsi,
-            tahun = LocalDateTime.parse(it.tahun.toString(), DateTimeFormatter.ISO_DATE_TIME),
-            dibuat = LocalDateTime.parse(it.dibuat.toString(), DateTimeFormatter.ISO_DATE_TIME),
+            tahun = it.tahun,
+            dibuat = it.dibuat,
             idCO = it.CabangOlahragaId.toInt()
         )
     }

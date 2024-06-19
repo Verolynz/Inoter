@@ -3,20 +3,27 @@ package com.verolynz.kelompok5.inoter.ui.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.verolynz.kelompok5.inoter.R
+import com.verolynz.kelompok5.inoter.data.local.COEntity
+import com.verolynz.kelompok5.inoter.data.local.OlahragaDB
+import com.verolynz.kelompok5.inoter.data.repositories.OlahragaRepository
 import com.verolynz.kelompok5.inoter.data.viewmodels.OlahragaViewModels
 import com.verolynz.kelompok5.inoter.data.viewmodels.ViewModelFactory
 import com.verolynz.kelompok5.inoter.room.AppViewModel
 import com.verolynz.kelompok5.inoter.room.ArtikelDatabase
 import com.verolynz.kelompok5.inoter.room.RoomViewModelFactory
 import com.verolynz.kelompok5.inoter.ui.adapters.ArtikelAdapterRoom
+import com.verolynz.kelompok5.inoter.ui.adapters.COAdapter
 import java.io.File
+import com.verolynz.kelompok5.inoter.utils.ExecutorsUtils
 
 class AdminMainActivity : AppCompatActivity() {
     private lateinit var appViewModel: AppViewModel
@@ -25,17 +32,24 @@ class AdminMainActivity : AppCompatActivity() {
     private lateinit var olahragaViewModel: OlahragaViewModels
 //    private lateinit var olahragaAdapter: OlahragaAdapter
     private lateinit var recyclerViewOlahraga: RecyclerView
+    private lateinit var olaharagaRepository: OlahragaRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val olahragafactory = ViewModelFactory.getInstance(this)
+        val olahragaViewModel = ViewModelProvider(this, olahragafactory)[OlahragaViewModels::class.java]
+        val cODao = OlahragaDB.getDatabase(this).CODao()
+        val atletDao = OlahragaDB.getDatabase(this).AtletDao()
+        val usersDao = OlahragaDB.getDatabase(this).UsersDao()
+        val executorsUtils = ExecutorsUtils()
+        olaharagaRepository = OlahragaRepository.getInstance(cODao, atletDao, usersDao, executorsUtils)
+        olaharagaRepository.getAllCO()
         // Mendapatkan instance ViewModel
         val factory = RoomViewModelFactory.getInstance(this)
         appViewModel = ViewModelProvider(this, factory)[AppViewModel::class.java]
 
-        val olahragafactory = ViewModelFactory.getInstance(this)
-        val olahragaViewModel = ViewModelProvider(this, olahragafactory)[OlahragaViewModels::class.java]
+
 
         // Menghubungkan variabel dengan komponen di layout
         recyclerView = findViewById(R.id.rvartikel)
@@ -57,6 +71,36 @@ class AdminMainActivity : AppCompatActivity() {
                     }
                     override fun onMoreClicked(data: ArtikelDatabase, position: Int) {
                         PopUpArtikel(data, position).show(supportFragmentManager, PopUpArtikel.TAG)
+                    }
+                })
+            }
+        }
+
+
+
+
+        olahragaViewModel.getAllCOlist().observe(this) { listCO ->
+            if (listCO != null) {
+                val coAdapter = COAdapter(listCO)
+                recyclerViewOlahraga.adapter = coAdapter
+                for (item in listCO) {
+                    Log.d("AdminMainActivity", "CO item: $item")
+                }
+                coAdapter.setOnItemClickCallback(object : COAdapter.OnItemClickCallback {
+                    override fun onItemClicked(data: COEntity) {
+//                        val intent = Intent(this@AdminMainActivity, DetailCOActivity::class.java)
+//                        intent.putExtra(DetailCOActivity.EXTRA_CO, data)
+//                        startActivity(intent)
+                    }
+
+                    override fun onDelete(data: COEntity, position: Int) {
+//                        olahragaViewModel.deleteCO(data)
+                    }
+
+                    override fun onUpdate(data: COEntity) {
+//                        val intent = Intent(this@AdminMainActivity, AddEditCOActivity::class.java)
+//                        intent.putExtra(AddEditCOActivity.EXTRA_CO, data)
+//                        startActivity(intent)
                     }
                 })
             }
@@ -87,4 +131,5 @@ class AdminMainActivity : AppCompatActivity() {
 
         startActivity(navigateToDetail)
     }
+
 }

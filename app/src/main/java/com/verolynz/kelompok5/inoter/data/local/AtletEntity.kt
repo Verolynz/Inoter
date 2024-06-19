@@ -6,8 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+
 
 @Entity("atlet",
     foreignKeys = [
@@ -26,16 +25,16 @@ data class AtletEntity (
     val id: Int,
     val name: String,
     val deskripsi: String,
-    val tahun: LocalDateTime,
-    val dibuat: LocalDateTime,
+    val tahun: String,
+    val dibuat: String,
     val idCO: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
-        LocalDateTime.parse(parcel.readString()!!, DateTimeFormatter.ISO_DATE_TIME),
-        LocalDateTime.parse(parcel.readString()!!, DateTimeFormatter.ISO_DATE_TIME),
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readInt()
 
     )
@@ -44,8 +43,8 @@ data class AtletEntity (
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(deskripsi)
-        parcel.writeString(dibuat.format(DateTimeFormatter.ISO_DATE_TIME))
-        parcel.writeString(dibuat.format(DateTimeFormatter.ISO_DATE_TIME))
+        parcel.writeString(tahun)
+        parcel.writeString(dibuat)
         parcel.readInt()
     }
 

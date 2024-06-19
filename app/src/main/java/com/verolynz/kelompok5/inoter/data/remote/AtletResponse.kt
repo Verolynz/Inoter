@@ -5,8 +5,8 @@ import java.time.LocalDateTime
 data class AtletResponse(
     val name: String,
     val deskripsi: String,
-    val tahun: LocalDateTime,
-    val dibuat: LocalDateTime,
+    val tahun: String,
+    val dibuat: String,
     val id: String,
     val CabangOlahragaId: String
 )

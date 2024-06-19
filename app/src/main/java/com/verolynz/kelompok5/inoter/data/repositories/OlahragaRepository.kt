@@ -221,6 +221,7 @@ class OlahragaRepository private constructor(
     }
 
     fun getAllCOlist(): LiveData<List<COEntity>> = cODao.getAllCO()
+
     fun insertAtlet(atletEntity: AtletEntity) {
         executorsUtils.diskIO().execute { atletDao.insertAtlet(atletEntity) }
     }

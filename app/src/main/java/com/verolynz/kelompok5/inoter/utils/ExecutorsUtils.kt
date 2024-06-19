@@ -13,6 +13,7 @@ class ExecutorsUtils @VisibleForTesting constructor(
 ) {
 
     companion object {
+
         private const val THREAD_COUNT = 3
     }
 
