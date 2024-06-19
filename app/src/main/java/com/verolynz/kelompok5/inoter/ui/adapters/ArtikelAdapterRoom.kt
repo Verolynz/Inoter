@@ -1,9 +1,11 @@
 package com.verolynz.kelompok5.inoter.ui.adapters
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +26,7 @@ class ArtikelAdapterRoom(private var artikelList: List<ArtikelDatabase>) :
     // Interface untuk callback ketika item diklik
     interface OnItemClickCallback {
         fun onItemClicked(data: ArtikelDatabase)
+        fun onMoreClicked(data: ArtikelDatabase, position: Int)
     }
 
     // Kelas ViewHolder untuk menyimpan referensi view yang digunakan dalam RecyclerView
@@ -31,14 +34,24 @@ class ArtikelAdapterRoom(private var artikelList: List<ArtikelDatabase>) :
         val artikelName: TextView = itemView.findViewById(R.id.textViewTitle)
         val artikelDescription: TextView = itemView.findViewById(R.id.textViewDescription)
         val artikelImage: ImageView = itemView.findViewById(R.id.imageViewArtikel)
+
+
+//        init {
+//            if (artikelName == null) Log.e("ArtikelViewHolder", "textViewTitle is null")
+//            if (artikelDescription == null) Log.e("ArtikelViewHolder", "textViewDescription is null")
+//            if (artikelImage == null) Log.e("ArtikelViewHolder", "imageViewArtikel is null")
+//            if (btnMore == null) Log.e("ArtikelViewHolder", "edit button is null")
+//        }
     }
+
+
 
     // Fungsi untuk membuat ViewHolder (Melakukan setting untuk XML yang akan kita gunakan untuk menampilkan data)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtikelViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.rvartikelmainactivity, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.rvartikelmainactivity, parent, false)
         return ArtikelViewHolder(view)
     }
+
 
     // Fungsi untuk mengikat data dengan ViewHolder (memasukkan data yang kita miliki ke dalam XML ViewHolder)
     override fun onBindViewHolder(holder: ArtikelViewHolder, position: Int) {
@@ -50,6 +63,9 @@ class ArtikelAdapterRoom(private var artikelList: List<ArtikelDatabase>) :
         // Mengatur image
         val uri = Uri.fromFile(data.image)
         holder.artikelImage.setImageURI(uri)
+
+        // mengatur aksi ketika button more di klik
+//        holder.btnMore.setOnClickListener { onItemClickCallback.onMoreClicked(artikelList [holder.layoutPosition], holder.absoluteAdapterPosition) }
 
         // Mengatur aksi ketika item diklik
         holder.itemView.setOnClickListener {

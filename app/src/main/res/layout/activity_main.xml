@@ -28,7 +28,7 @@
             android:layout_marginBottom="6dp"
             android:textColor="@color/black"
             android:text="Mari Manajemen Aplikasi Mu"/>
-        <androidx.recyclerview.widget.RecyclerView
+         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvartikel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.DetailArtikelActivity">
+    tools:context=".ui.activities.Updateartikel"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,64 +29,82 @@
             android:id="@+id/article_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detail Artikel"
+            android:text="Update Artikel"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"/>
-
-        <ImageButton
-
-            android:id="@+id/bagikan_btn1"
-            android:layout_width="30dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="14dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/gambar6"></ImageButton>
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/image_detail"
+        android:layout_margin="10dp"
+        android:id="@+id/image_preview"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_margin="16dp"
-        android:contentDescription="Image Detail"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/darker_gray"
+        android:contentDescription="Image Preview"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"/>
+        app:layout_constraintHorizontal_bias="0.5"/>
 
-    <TextView
-        android:id="@+id/text_title"
+    <Button
+        android:layout_margin="10dp"
+
+        android:id="@+id/button_select_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Gambar"
+        app:layout_constraintTop_toBottomOf="@id/image_preview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:layout_margin="10dp"
+
+        android:id="@+id/edit_text_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Judul Artikel"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/image_detail"
+        android:hint="Judul Artikel"
+        android:layout_marginBottom="16dp"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/button_select_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        app:layout_constraintWidth_percent="0.9"/>
 
-    <TextView
-        android:id="@+id/text_content"
+    <EditText
+        android:layout_margin="10dp"
+
+        android:id="@+id/edit_text_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Isi artikel panjang akan ditampilkan di sini."
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/text_title"
+        android:hint="Isi Artikel"
+        android:layout_marginBottom="16dp"
+        android:inputType="textMultiLine"
+        android:minLines="6"
+        android:gravity="top"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_post"
+        app:layout_constraintWidth_percent="0.9"/>
+
+    <Button
+        android:id="@+id/button_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posting"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginBottom="16dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

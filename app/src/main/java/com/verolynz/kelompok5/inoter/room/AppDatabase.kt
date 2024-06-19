@@ -9,7 +9,7 @@ import com.verolynz.kelompok5.inoter.utils.Converters
 import retrofit2.Converter
 
 
-@Database(entities = [ArtikelDatabase::class], version = 1)
+@Database(entities = [ArtikelDatabase::class], version = 2)
 
 // Menggunakan konverter tipe khusus untuk mengubah tipe data File menjadi String dan sebaliknya
 @TypeConverters(Converters::class)
@@ -38,6 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
                         context.applicationContext,
                         AppDatabase::class.java, "app_database"
                     )
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }

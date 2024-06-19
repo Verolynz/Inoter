@@ -14,4 +14,14 @@ class AppViewModel(private val appRepository: AppRepository) : ViewModel() {
     fun getAllArtikel(): LiveData<List<ArtikelDatabase>> {
         return appRepository.getAllArtikel()
     }
+
+    fun updateArtikel(artikel: ArtikelDatabase) {
+        appRepository.updateArtikel(artikel)
+    }
+    fun deleteArtikel(artikel: ArtikelDatabase) {
+        appRepository.deleteArtikel(artikel)
+    }
+
+
+
 }

@@ -27,7 +27,10 @@ class AdminMainActivity : AppCompatActivity() {
         
         // Menghubungkan variabel dengan komponen di layout
         recyclerView = findViewById(R.id.rvartikel)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
+
+//        recyclerviewHorizontal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerviewHorizontal.adapter = Adapter
 
         // Mengamati perubahan data pemain dan memperbarui RecyclerView
         appViewModel.getAllArtikel().observe(this) { artikelData ->
@@ -40,6 +43,11 @@ class AdminMainActivity : AppCompatActivity() {
                     ArtikelAdapterRoom.OnItemClickCallback {
                     override fun onItemClicked(data: ArtikelDatabase) {
                         showSelectedArtikel(data)
+                    }
+                    override fun onMoreClicked(data: ArtikelDatabase, position: Int) {
+                        PopUpArtikel(data, position).show(supportFragmentManager, PopUpArtikel.TAG)
+
+
                     }
                 })
             }
@@ -57,7 +65,9 @@ class AdminMainActivity : AppCompatActivity() {
         val navigateToDetail = Intent(this, DetailArtikelActivity::class.java)
 
         // Menambahkan dan membawa data pemain ke intent dengan tujuan ke DetailPlayerActivity
-        navigateToDetail.putExtra("player", data)
+        navigateToDetail.putExtra("judul", data.name)
+        navigateToDetail.putExtra("deskripsi", data.description)
+        navigateToDetail.putExtra("artikel_image", data.image)
 
         // Memulai activity baru
         startActivity(navigateToDetail)

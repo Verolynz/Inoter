@@ -42,6 +42,11 @@ class SeeMoreArtkelActivity : AppCompatActivity() {
                     override fun onItemClicked(data: ArtikelDatabase) {
                         showSelectedArtikel(data)
                     }
+                    override fun onMoreClicked(data: ArtikelDatabase, position: Int) {
+                        PopUpArtikel(data, position).show(supportFragmentManager, PopUpArtikel.TAG)
+
+
+                    }
                 })
             }
         }
@@ -57,8 +62,12 @@ class SeeMoreArtkelActivity : AppCompatActivity() {
         // Membuat intent untuk berpindah ke DetailPlayerActivity
         val navigateToDetail = Intent(this, DetailArtikelActivity::class.java)
 
+
         // Menambahkan dan membawa data pemain ke intent dengan tujuan ke DetailPlayerActivity
-        navigateToDetail.putExtra("player", data)
+        navigateToDetail.putExtra("judul", data.name)
+        navigateToDetail.putExtra("deskripsi", data.description)
+        navigateToDetail.putExtra("artikel_image", data.image)
+
 
         // Memulai activity baru
         startActivity(navigateToDetail)

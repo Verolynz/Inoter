@@ -15,6 +15,19 @@ class AppRepository private constructor(private val appDao: AppDao, private val 
         ExecutorsUtils.diskIO().execute { appDao.insertArtikel(artikel) }
     }
 
+    // Memperbarui data pemain ke dalam database
+    fun updateArtikel(artikel: ArtikelDatabase) {
+        // Menjalankan operasi insert di thread yang berbeda
+        ExecutorsUtils.diskIO().execute { appDao.updateArtikel(artikel) }
+    }
+    // Menghapus data pemain ke dalam database
+    fun deleteArtikel(artikel: ArtikelDatabase) {
+        // Menjalankan operasi insert di thread yang berbeda
+        ExecutorsUtils.diskIO().execute { appDao.deleteArtikel(artikel) }
+    }
+
+
+
     companion object {
         // Variabel untuk menyimpan instance dari AppRepository
         @Volatile

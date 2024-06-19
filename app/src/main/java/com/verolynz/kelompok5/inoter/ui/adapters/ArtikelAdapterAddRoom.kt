@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class ArtikelAdapterAddRoom(private var artikelList: List<ArtikelDatabase>) :
     // Interface untuk callback ketika item diklik
     interface OnItemClickCallback {
         fun onItemClicked(data: ArtikelDatabase)
+        fun onMoreClicked(data: ArtikelDatabase, position: Int)
     }
 
     // Kelas ViewHolder untuk menyimpan referensi view yang digunakan dalam RecyclerView
@@ -31,6 +33,7 @@ class ArtikelAdapterAddRoom(private var artikelList: List<ArtikelDatabase>) :
         val artikelName: TextView = itemView.findViewById(R.id.textViewTitle)
         val artikelDescription: TextView = itemView.findViewById(R.id.textViewDescription)
         val artikelImage: ImageView = itemView.findViewById(R.id.imageViewArtikel)
+        val btnMore: ImageButton = itemView.findViewById(R.id.edit)
     }
 
     // Fungsi untuk membuat ViewHolder (Melakukan setting untuk XML yang akan kita gunakan untuk menampilkan data)
@@ -53,6 +56,10 @@ class ArtikelAdapterAddRoom(private var artikelList: List<ArtikelDatabase>) :
         // Mengatur image
         val uri = Uri.fromFile(data.image)
         holder.artikelImage.setImageURI(uri)
+
+        // mengatur aksi ketika button more di klik
+        holder.btnMore.setOnClickListener { onItemClickCallback.onMoreClicked(artikelList [holder.layoutPosition], holder.absoluteAdapterPosition) }
+
 
         // Mengatur aksi ketika item diklik
         holder.itemView.setOnClickListener {
