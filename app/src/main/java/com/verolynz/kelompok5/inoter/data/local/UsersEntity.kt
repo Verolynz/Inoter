@@ -33,12 +33,12 @@ data class UsersEntity (
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<AtletEntity> {
-        override fun createFromParcel(parcel: Parcel): AtletEntity {
-            return AtletEntity(parcel)
+    companion object CREATOR : Parcelable.Creator<UsersEntity> {
+        override fun createFromParcel(parcel: Parcel): UsersEntity {
+            return UsersEntity(parcel)
         }
 
-        override fun newArray(size: Int): Array<AtletEntity?> {
+        override fun newArray(size: Int): Array<UsersEntity?> {
             return arrayOfNulls(size)
         }
     }
