@@ -304,11 +304,13 @@ class OlahragaRepository private constructor(
                     if (users.role == "admin") {
                         Toast.makeText(context, "Anda login sebagai Admin", Toast.LENGTH_SHORT).show()
                         val intent = Intent(context, AdminMainActivity::class.java)
+                        intent.putExtra("username", username)
                         context.startActivity(intent)
                     }
                     if (users.role == "user") {
                         Toast.makeText(context, "Anda login sebagai User", Toast.LENGTH_SHORT).show()
                          val intent = Intent(context, UserMainActivity::class.java)
+                        intent.putExtra("username", username)
                          context.startActivity(intent)
                     }
                     }

@@ -50,21 +50,25 @@ class AdminMainActivity : AppCompatActivity() {
         when {
             jambukaapk.isBefore(earlyMorning) -> {
                 sun.setImageResource(0)
-                greetingtext.text = "Selamat Subuh"
+                val username = intent.getStringExtra("username")
+                greetingtext.text = "Selamat Subuh, $username"
             }
             jambukaapk.isBefore(noon) -> {
-                greetingtext.text = "Selamat Pagi"
+                val username = intent.getStringExtra("username")
+                greetingtext.text = "Selamat Pagi, $username"
             }
             jambukaapk.isBefore(evening) -> {
-                greetingtext.text = "Selamat Siang"
+                val username = intent.getStringExtra("username")
+                greetingtext.text = "Selamat Siang, $username"
             }
             jambukaapk.isBefore(night) -> {
                 sun.setImageResource(R.drawable.baseline_nights_stay_24)
-                greetingtext.text = "Selamat Malam "
+                val username = intent.getStringExtra("username")
+                greetingtext.text = "Selamat Malam, $username "
             }
             else -> {
-                // Optional: handle the case for exactly midnight if needed
-                greetingtext.text = "Selamat Malam"
+                val username = intent.getStringExtra("username")
+                greetingtext.text = "Selamat Malam $username"
             }
         }
         val olahragafactory = ViewModelFactory.getInstance(this)
