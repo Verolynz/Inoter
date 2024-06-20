@@ -91,7 +91,7 @@ class UserMainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         recyclerViewOlahraga = findViewById(R.id.rvolahraga)
-        recyclerViewOlahraga.layoutManager = GridLayoutManager(this, 4)
+        recyclerViewOlahraga.layoutManager = GridLayoutManager(this, 2)
 
         // Mengamati perubahan data artikel dan memperbarui RecyclerView
         appViewModel.getAllArtikel().observe(this) { artikelData ->

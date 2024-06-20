@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:padding="20dp"
+    android:background="#f2eee5"
     android:scrollbars="none"
 
-    tools:context=".ui.activities.AdminMainActivity">
+    tools:context=".ui.activities.InoterActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
                 android:id="@+id/salam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/quicksand_medium"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Selamat Pagi"
                 android:drawablePadding="10dp"
                 android:textSize="16sp"
@@ -36,10 +37,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:fontFamily="@font/play_bold"
             android:layout_marginBottom="6dp"
             android:textColor="@color/black"
             android:text="Mari Manajemen Aplikasi Mu"/>
-         <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvartikel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="Manajemen Artikel"
             android:textSize="13sp"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"
             android:layout_gravity="end"
@@ -65,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
+            android:fontFamily="@font/play_bold"
             android:layout_marginBottom="10dp"
             android:text="Daftar Olahraga :"/>
         <androidx.recyclerview.widget.RecyclerView
@@ -72,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:spanCount="3"
+            app:spanCount="2"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/rvolahraga"/>
 

@@ -125,13 +125,13 @@ class Updateartikel : AppCompatActivity() {
         // Memeriksa apakah nama pemain kosong
         if (artikelName.text.toString().isEmpty()) {
             error++
-            artikelName.error = "Nama pemain tidak boleh kosong"
+            artikelName.error = "Nama Artikel tidak boleh kosong"
         }
 
         // Memeriksa apakah deskripsi pemain kosong
         if (artikelDescription.text.toString().isEmpty()) {
             error++
-            artikelDescription.error = "Deskripsi pemain tidak boleh kosong"
+            artikelDescription.error = "Deskripsi Artikel tidak boleh kosong"
         }
 
 
@@ -161,7 +161,7 @@ class Updateartikel : AppCompatActivity() {
         // Menampilkan pesan bahwa data pemain berhasil ditambahkan
         Toast.makeText(
             this@Updateartikel,
-            "Data pemain berhasil diubah",
+            "Data Artikel berhasil diubah",
             Toast.LENGTH_SHORT
         ).show()
 

@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f2eee5"
     tools:context=".ui.activities.SeeMoreArtkelActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="#e2d4d4"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Artikel"
-            android:textColor="@android:color/white"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"/>
@@ -55,10 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_add_24"
-    android:contentDescription="Add Article"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_margin="16dp"
-    app:backgroundTint="@color/white"/>
+        android:contentDescription="Add Article"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
