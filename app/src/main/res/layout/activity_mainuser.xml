@@ -7,7 +7,7 @@
     android:layout_margin="20dp"
     android:scrollbars="none"
 
-    tools:context=".ui.activities.AdminMainActivity">
+    tools:context=".ui.activities.UserMainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:id="@+id/lihatartikel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Manajemen Artikel"
+            android:text=""
             android:textSize="13sp"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"

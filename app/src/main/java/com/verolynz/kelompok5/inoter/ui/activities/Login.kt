@@ -24,6 +24,7 @@ class Login : AppCompatActivity() {
         Repository()
         loginviewholder()
         generateadmin()
+        generateuser()
 
     }
 
@@ -58,5 +59,8 @@ class Login : AppCompatActivity() {
     }
     private fun generateadmin() {
         olahragaRepository.checkAndCreateAdmin()
+    }
+    private fun generateuser() {
+        olahragaRepository.checkAndCreateTest()
     }
 }

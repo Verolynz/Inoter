@@ -20,6 +20,7 @@ import com.verolynz.kelompok5.inoter.data.remote.COResponse
 import com.verolynz.kelompok5.inoter.data.remote.ConfigAPI
 import com.verolynz.kelompok5.inoter.data.remote.ServiceAPI
 import com.verolynz.kelompok5.inoter.ui.activities.AdminMainActivity
+import com.verolynz.kelompok5.inoter.ui.activities.UserMainActivity
 import com.verolynz.kelompok5.inoter.utils.ExecutorsUtils
 import com.verolynz.kelompok5.inoter.utils.NetworkUtils
 import com.verolynz.kelompok5.inoter.utils.toAtletEntity
@@ -262,6 +263,13 @@ class OlahragaRepository private constructor(
             createDefaultAdmin()
         }
     }
+    fun checkAndCreateTest() {
+        val user = usersDao.getUsersUser().value
+        if (user == null) {
+            createAccount()
+        }
+    }
+
 
 
     fun createDefaultAdmin() {
@@ -275,23 +283,19 @@ class OlahragaRepository private constructor(
             usersDao.insertUsers(defaultAdmin)
         }
     }
-    suspend fun createAccount(context: Context, username: String, password: String) {
-        if (NetworkUtils.isConnectedToInternet(context)) {
-            withContext(Dispatchers.IO) {
+    fun createAccount() {
+
+            executorsUtils.diskIO().execute {
                 val newUser = UsersEntity(
                     id = 0,
-                    username = username,
-                    password = password,
+                    username = "test",
+                    password = "test123",
                     role = "user"
                 )
                 usersDao.insertUsers(newUser)
             }
-        } else {
-            withContext(Dispatchers.Main) {
-                Toast.makeText(context, "Tidak terhubung dengan jaringan", Toast.LENGTH_SHORT).show()
-            }
         }
-    }
+
 
     fun loginAuth(username: String, password: String, context: Context) {
         usersDao.getUsersAuth(username, password).observe(context as LifecycleOwner, { users ->
@@ -304,8 +308,8 @@ class OlahragaRepository private constructor(
                     }
                     if (users.role == "user") {
                         Toast.makeText(context, "Anda login sebagai User", Toast.LENGTH_SHORT).show()
-                        // val intent = Intent(context, UserMainActivity::class.java)
-                        // context.startActivity(intent)
+                         val intent = Intent(context, UserMainActivity::class.java)
+                         context.startActivity(intent)
                     }
                     }
             }
