@@ -3,6 +3,7 @@ package com.verolynz.kelompok5.inoter.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.button.MaterialButton
@@ -25,6 +26,10 @@ class Login : AppCompatActivity() {
         loginviewholder()
         generateadmin()
         generateuser()
+        val signupButton = findViewById<TextView>(R.id.signups)
+        signupButton.setOnClickListener {
+            signup()
+        }
 
     }
 
@@ -62,5 +67,11 @@ class Login : AppCompatActivity() {
     }
     private fun generateuser() {
         olahragaRepository.checkAndCreateTest()
+    }
+    private fun signup() {
+        val intent = Intent(this, SignUp::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+
     }
 }

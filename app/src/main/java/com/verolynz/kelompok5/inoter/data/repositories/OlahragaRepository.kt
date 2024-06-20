@@ -269,6 +269,18 @@ class OlahragaRepository private constructor(
             createAccount()
         }
     }
+    fun buatakun(username: String, password: String) {
+        executorsUtils.diskIO().execute {
+            val newUser = UsersEntity(
+                id = 0 ,
+                username = username,
+                password = password,
+                role = "user"
+            )
+            usersDao.insertUsers(newUser)
+        }
+    }
+
 
 
 
